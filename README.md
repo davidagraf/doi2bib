@@ -2,7 +2,7 @@ doi2bib
 =======
 
 ### Installation
-  npm install
+    npm install
 
 ### Run
-  node test.js
+    node test.js
