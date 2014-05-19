@@ -3,10 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "q": "^1.0.1",
     "request": "^2.35.0",
-    "xml2js": "^0.4.3",
-    "JSONPath": "^0.10.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
