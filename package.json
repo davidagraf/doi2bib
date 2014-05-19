@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "request": "^2.35.0",
+    "request": "^2.35.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
