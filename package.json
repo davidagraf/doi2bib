@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "express": "^4.2.0",
+    "gulp-nodemon": "^1.0.3",
     "request": "^2.35.0"
   },
   "devDependencies": {

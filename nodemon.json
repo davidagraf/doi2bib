@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    "node_modules/*",
+    "public/*",
+    ".git/*",
+    "*.swp"
+  ]
+}
