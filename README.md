@@ -2,7 +2,10 @@ doi2bib
 =======
 
 ### Installation
-    npm install
+    npm install && bower install
 
-### Run
-    node test.js
+### Run Development
+    gulp serve
+    
+### Run Production
+    node server.js
