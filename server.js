@@ -14,4 +14,10 @@ app.get('/doi2bib', function(req, res) {
   });
 });
 
-app.listen(3000);
+app.listen(
+  process.env.OPENSHIFT_NODEJS_PORT || 3000,
+  process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+  function() {
+    console.log('node server started');
+  }
+);
