@@ -4,13 +4,14 @@
   "private": true,
   "dependencies": {
     "express": "^4.2.0",
-    "gulp-nodemon": "^1.0.3",
+    "q": "^1.0.1",
     "request": "^2.35.0"
   },
   "devDependencies": {
     "gulp": "^3.6.2",
     "gulp-jshint": "^1.6.1",
     "gulp-load-plugins": "^0.5.1",
+    "gulp-nodemon": "^1.0.3",
     "jshint-stylish": "^0.2.0"
   }
 }
