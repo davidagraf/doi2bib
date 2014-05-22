@@ -1,27 +1,33 @@
 {
-  "name": "bibtex",
+  "name": "doi2bib",
   "version": "0.0.1",
-  "description": "Doi2Bib",
-  "dependencies": {
-    "express": "~4.2.0",
-    "q": "~1.0.1",
-    "request": "~2.35.0"
+  "description": "doi to bib",
+  "keywords": [
+    "doi",
+    "bib"
+  ],
+  "author": {
+    "name": "David Graf
+    "email": "davidagraf@gmail.com",
+    "url": "https://twitter.com/davidagraf"
   },
-  "devDependencies": {
-    "gulp": "~3.6.2",
-    "gulp-jshint": "~1.6.1",
-    "gulp-load-plugins": "~0.5.1",
-    "gulp-nodemon": "~1.0.3",
-    "jshint-stylish": "~0.2.0"
-  },
+  "homepage": "https://twitter.com/davidagraf",
   "repository": {
     "type": "git",
-    "url": "https://github.com/davidagraf/doi2bib"
+    "url": "https://github.com/davidagraf/doi2bib.git"
   },
   "engines": {
     "node": ">= 0.6.0",
     "npm": ">= 1.0.0"
   },
+  "dependencies": {
+    "express": "~4.2.0",
+    "q": "~1.0.1",
+    "request": "~2.35.0"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
   "private": true,
   "main": "server.js"
 }
