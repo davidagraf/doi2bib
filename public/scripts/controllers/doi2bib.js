@@ -5,7 +5,7 @@ var doi2BibApp = angular.module('Doi2BibApp',[]);
 doi2BibApp.controller('Doi2BibController', ['$scope', '$http', function($scope, $http) {
   $scope.toBib = function() {
     //$scope.doi = '10.1158/0008-5472.CAN-09-1089';
-
+    
     $http({ 
       method: 'GET',
       url: '/doi2bib',
@@ -15,8 +15,11 @@ doi2BibApp.controller('Doi2BibController', ['$scope', '$http', function($scope, 
     }).
     success(function(data) {
       $scope.bib = data;
+      $scope.error = undefined;
     }).
-    error(function() {
+    error(function(data/*, status, headers, config*/) {
+      $scope.error = data;
+      $scope.bib = undefined;
     });
   };
 }]);

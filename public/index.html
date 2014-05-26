@@ -4,22 +4,32 @@
     <meta charset="utf-8"/>
     <!-- build:css styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <!-- endbuild -->
+
+    <!-- build:css styles/site.css -->
+    <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
   <body class="container" ng-controller="Doi2BibController">
     <div class="row">
-      <div class="col-md-12">
-        <input type="text" ng-model="doi"></input>
+      <div class="col-md-offset-4 col-md-4">
+        <input type="text" class="form-control" ng-model="doi"></input>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
-        <button ng-click="toBib()">To Bib</button>
+      <div class="col-md-offset-4 col-md-4 centered">
+        <button type="button" class="btn btn-default" ng-click="toBib()">To Bib</button>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row" ng-show="bib">
+      <div class="col-md-offset-2 col-md-8 centered">
         <div>{{bib}}</div>
+      </div>
+    </div>
+    <div class="row" ng-show="error">
+      <div class="col-md-offset-2 col-md-8 centered">
+        <div class="error-text">{{error}}</div>
       </div>
     </div>
 

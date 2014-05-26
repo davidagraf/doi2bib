@@ -18,7 +18,11 @@ module.exports = {
   doi2bib: function(doi) {
     var deferred = Q.defer();
     request(genOptions(doi), function(error, response, body) {
-      deferred.resolve(body);
+      if (response.statusCode === 200) {
+        deferred.resolve(body);
+      } else {
+        deferred.reject(response.statusCode);
+      }
     });
     return deferred.promise;
   }

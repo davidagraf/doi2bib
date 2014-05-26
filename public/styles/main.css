@@ -1,0 +1,11 @@
+.centered {
+  text-align: center;
+}
+
+.row {
+  margin-top:20px;
+}
+
+.error-text {
+  color: #a94442;
+}
