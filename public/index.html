@@ -2,6 +2,7 @@
 <html ng-app="Doi2BibApp">
   <head>
     <meta charset="utf-8"/>
+
     <!-- build:css styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
@@ -13,22 +14,30 @@
   </head>
   <body class="container" ng-controller="Doi2BibController">
     <div class="row">
-      <div class="col-md-offset-4 col-md-4">
-        <input type="text" class="form-control" ng-model="doi" placeholder="Enter a Digital Object Identifier ..."></input>
+      <div class="col-md-offset-4 col-md-4 centered">
+        <h1>doi2bib</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-md-offset-4 col-md-4 centered">
-        <button type="button" class="btn btn-default" ng-click="toBib()">To Bib</button>
+        <h2>citation made easy</h2>
       </div>
     </div>
-    <div class="row" ng-show="bib">
-      <div class="col-md-offset-2 col-md-8 centered">
+    <div class="row margin-top">
+      <div class="col-md-offset-4 col-md-4">
+        <input type="text" class="form-control" ng-model="doi" placeholder="enter a digital object identifier ..."></input>
+      </div>
+    </div>
+    <div class="row margin-top">
+      <div class="col-md-offset-4 col-md-4 centered">
+        <button type="button" class="btn btn-default" ng-click="toBib()">to bib</button>
+      </div>
+    </div>
+    <div class="row margin-top">
+      <div class="col-md-offset-2 col-md-8 centered" ng-show="bib">
         <div>{{bib}}</div>
       </div>
-    </div>
-    <div class="row" ng-show="error">
-      <div class="col-md-offset-2 col-md-8 centered">
+      <div class="col-md-offset-2 col-md-8 centered" ng-show="error">
         <div class="error-text">{{error}}</div>
       </div>
     </div>
