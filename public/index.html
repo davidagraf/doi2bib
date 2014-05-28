@@ -26,7 +26,9 @@
     </div>
     <div class="row margin-top">
       <div class="col-md-offset-4 col-md-4">
-        <input type="text" class="form-control" ng-model="doi" placeholder="enter a digital object identifier ..."></input>
+        <input type="text" class="form-control" ng-model="doi"
+               ng-keyup="$event.keyCode == 13 && toBib()"
+               placeholder="enter a digital object identifier ..."></input>
       </div>
     </div>
     <div class="row margin-top">
