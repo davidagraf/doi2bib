@@ -3,9 +3,14 @@
 }
 
 .margin-top {
-  margin-top:20px;
+  margin-top:50px;
 }
 
 .error-text {
   color: #a94442;
+}
+
+.bottom {    
+    position: absolute;
+    bottom: 0;
 }

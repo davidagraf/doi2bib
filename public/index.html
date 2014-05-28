@@ -14,14 +14,15 @@
     <title>doi2bib</title>
   </head>
   <body class="container" ng-controller="Doi2BibController">
-    <div class="row">
+    <div class="row margin-top">
       <div class="col-md-offset-4 col-md-4 centered">
-        <h1>doi2bib</h1>
+        <img src="doi2bib-logo.png" alt="doi2bib_logo" height="60" width="60" />
       </div>
     </div>
+
     <div class="row">
-      <div class="col-md-offset-4 col-md-4 centered">
-        <h2>citation made easy</h2>
+      <div class="col-md-offset-3 col-md-6 centered">
+        <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the bibtex</h2>
       </div>
     </div>
     <div class="row margin-top">
@@ -40,8 +41,13 @@
       <div class="col-md-offset-2 col-md-8 centered" ng-show="bib">
         <div>{{bib}}</div>
       </div>
-      <div class="col-md-offset-2 col-md-8 centered" ng-show="error">
+      <div class="col-md-offset-4 col-md-8 centered" ng-show="error">
         <div class="error-text">{{error}}</div>
+      </div>
+    </div>
+    <div class="row bottom">
+      <div class="col-md-offset-2 col-md-12 centered">
+        <p>&#169; 2014 doi2bib.org | Terms and Conditions | Contact</p>
       </div>
     </div>
 
