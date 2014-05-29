@@ -13,44 +13,52 @@
     <!-- endbuild -->
     <title>doi2bib</title>
   </head>
-  <body class="container" ng-controller="Doi2BibController">
-    <div class="row margin-top">
-      <div class="col-md-offset-4 col-md-4 centered">
-        <img src="doi2bib-logo.png" alt="doi2bib_logo" height="60" width="60" />
+  <body ng-controller="Doi2BibController">
+    <div class="container">
+      <div class="row margin-top">
+        <div class="col-md-offset-4 col-md-4 centered">
+          <img src="imgs/doi2bib-logo.png" alt="doi2bib_logo" height="60" width="60" />
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-offset-3 col-md-6 centered">
-        <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the bibtex entry</h2>
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6 centered">
+          <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the bibtex entry</h2>
+        </div>
+      </div>
+      <div class="row margin-top">
+        <div class="col-md-offset-4 col-md-4">
+          <input type="text" class="form-control" ng-model="doi"
+                 ng-keyup="$event.keyCode == 13 && toBib()"
+                 placeholder="enter a digital object identifier ..."></input>
+        </div>
+      </div>
+      <div class="row margin-top">
+        <div class="col-md-offset-4 col-md-4 centered">
+          <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
+        </div>
+      </div>
+      <div class="row margin-top">
+        <div class="col-md-offset-2 col-md-8 centered" ng-show="bib">
+          <div>{{bib}}</div>
+        </div>
+        <div class="col-md-offset-2 col-md-4 centered" ng-show="error">
+          <div class="error-text">{{error}}</div>
+        </div>
       </div>
     </div>
-    <div class="row margin-top">
-      <div class="col-md-offset-4 col-md-4">
-        <input type="text" class="form-control" ng-model="doi"
-               ng-keyup="$event.keyCode == 13 && toBib()"
-               placeholder="enter a digital object identifier ..."></input>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6 centered">
+            2014 doi2bib.org | Terms and Conditions | About | Contact
+          </div>
+          <div class="col-md-offset-3 col-md-6 centered">
+            DOI is a registered trademark of the International DOI Foundation
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="row margin-top">
-      <div class="col-md-offset-4 col-md-4 centered">
-        <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
-      </div>
-    </div>
-    <div class="row margin-top">
-      <div class="col-md-offset-2 col-md-8 centered" ng-show="bib">
-        <div>{{bib}}</div>
-      </div>
-      <div class="col-md-offset-4 col-md-8 centered" ng-show="error">
-        <div class="error-text">{{error}}</div>
-      </div>
-    </div>
-    <div class="row bottom">
-      <div class="col-md-offset-10 col-md-12 centered">
-        <p>2014 doi2bib.org | Terms and Conditions | About | Contact <br/>
-        DOI is a registered trademark of the International DOI Foundation</p>
-      </div>
-    </div>
+    </footer>
 
     <!-- build:js scripts/scripts.js -->
     <script src="bower_components/angular/angular.js"></script>
