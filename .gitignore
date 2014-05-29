@@ -2,3 +2,4 @@ node_modules
 *.swp
 public/bower_components
 dist
+public/.DS_Store
