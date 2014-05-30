@@ -27,23 +27,21 @@
         </div>
       </div>
       <div class="row margin-top">
-        <div class="col-md-offset-4 col-md-4">
-          <input type="text" class="form-control" ng-model="doi"
-                 ng-keyup="$event.keyCode == 13 && toBib()"
-                 placeholder="enter a digital object identifier ..."></input>
+        <div ng-attr-class="col-md-offset-4 col-md-4 {{error && 'has-error'}}">
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="doi"
+                   ng-keyup="$event.keyCode == 13 && toBib()"
+                   placeholder="enter a digital object identifier ..."></input>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
+            </span>
+          </div>
         </div>
       </div>
       <div class="row margin-top">
-        <div class="col-md-offset-4 col-md-4 centered">
-          <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
-        </div>
-      </div>
-      <div class="row margin-top">
-        <div class="col-md-offset-2 col-md-8" ng-show="bib">
-          <pre>{{bib}}</pre>
-        </div>
-        <div class="col-md-offset-2 col-md-4 centered" ng-show="error">
-          <div class="error-text">{{error}}</div>
+        <div class="col-md-offset-2 col-md-8">
+          <pre ng-show="bib">{{bib}}</pre>
+          <div class="text-danger centered" ng-show="error">{{error}}</div>
         </div>
       </div>
     </div>
