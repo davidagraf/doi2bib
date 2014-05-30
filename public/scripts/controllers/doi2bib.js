@@ -2,10 +2,9 @@
 
 var doi2BibApp = angular.module('Doi2BibApp',[]);
 
-doi2BibApp.controller('Doi2BibController', ['$scope', '$http', function($scope, $http) {
+doi2BibApp.controller('Doi2BibController', ['$scope', '$http', 'Latex',
+    function($scope, $http, Latex) {
   $scope.toBib = function() {
-    //$scope.doi = '10.1158/0008-5472.CAN-09-1089';
-    
     $http({ 
       method: 'GET',
       url: '/doi2bib',
@@ -14,7 +13,7 @@ doi2BibApp.controller('Doi2BibController', ['$scope', '$http', function($scope, 
       }
     }).
     success(function(data) {
-      $scope.bib = data;
+      $scope.bib = Latex.encode(Latex.removeNA(data));
       $scope.error = undefined;
     }).
     error(function(data/*, status, headers, config*/) {
