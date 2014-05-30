@@ -39,8 +39,8 @@
         </div>
       </div>
       <div class="row margin-top">
-        <div class="col-md-offset-2 col-md-8 centered" ng-show="bib">
-          <div>{{bib}}</div>
+        <div class="col-md-offset-2 col-md-8" ng-show="bib">
+          <pre>{{bib}}</pre>
         </div>
         <div class="col-md-offset-2 col-md-4 centered" ng-show="error">
           <div class="error-text">{{error}}</div>
@@ -62,6 +62,7 @@
 
     <!-- build:js scripts/scripts.js -->
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
 
     <script src="scripts/controllers/doi2bib.js"></script>
     <script src="scripts/lib/latex.js"></script>

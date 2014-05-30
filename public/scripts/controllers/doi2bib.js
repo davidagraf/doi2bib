@@ -1,6 +1,6 @@
 'use strict';
 
-var doi2BibApp = angular.module('Doi2BibApp',[]);
+var doi2BibApp = angular.module('Doi2BibApp',['ngResource']);
 
 doi2BibApp.controller('Doi2BibController', ['$scope', '$http', 'Latex',
     function($scope, $http, Latex) {
@@ -13,7 +13,7 @@ doi2BibApp.controller('Doi2BibController', ['$scope', '$http', 'Latex',
       }
     }).
     success(function(data) {
-      $scope.bib = Latex.encode(Latex.removeNA(data));
+      $scope.bib = Latex.indentBib(Latex.encode(Latex.removeNA(data.trim())));
       $scope.error = undefined;
     }).
     error(function(data/*, status, headers, config*/) {
