@@ -1,6 +1,6 @@
 'use strict';
 
-var doi2BibApp = angular.module('Doi2BibApp',['ngResource']);
+var doi2BibApp = angular.module('Doi2BibApp',[]);
 
 doi2BibApp.controller('Doi2BibController', ['$scope', '$http', 'Latex',
     function($scope, $http, Latex) {
