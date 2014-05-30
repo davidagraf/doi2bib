@@ -62,7 +62,18 @@ gulp.task('distpackage', function() {
   });
 });
 
-gulp.task('dist', ['distapp', 'distpublic', 'distpackage']);
+gulp.task('distimages', function () {
+    return gulp.src('public/imgs/**/*')
+        .pipe($.cache($.imagemin({
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: true
+        })))
+        .pipe(gulp.dest('dist/public/imgs'))
+        .pipe($.size());
+});
+
+gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distimages']);
 
 gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
