@@ -12,3 +12,6 @@ doi2bib
     
 ### Run Production
     node server.js
+
+### License
+The code in this repository is released under the Apache License, version 2.0. A copy can be found in the LICENSE file.
