@@ -23,7 +23,7 @@
 
       <div class="row">
         <div class="col-md-offset-3 col-md-6 centered">
-          <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the bibtex entry</h2>
+          <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the BibTeX entry</h2>
         </div>
       </div>
       <div class="row margin-top">
@@ -31,7 +31,7 @@
           <div class="input-group">
             <input type="text" class="form-control" ng-model="doi"
                    ng-keyup="$event.keyCode == 13 && toBib()"
-                   placeholder="enter a digital object identifier ..."></input>
+                   placeholder="Enter a digital object identifier ..."></input>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
             </span>
@@ -49,15 +49,15 @@
       <div class="container">
         <div class="row">
           <div class="col-md-offset-3 col-md-6 centered">
-            2014 doi2bib.org | Terms and Conditions | About | Contact
+            &copy; 2014 doi2bib | <a href="terms.html">Terms and Conditions</a> | <a href="about.html">About</a> | Contact | Follow <a href="https://twitter.com/intent/user?screen_name=doi2bib">@doi2bib</a>
           </div>
           <div class="col-md-offset-3 col-md-6 centered">
-            DOI is a registered trademark of the International DOI Foundation
+            DOI is a registered trademark of the International DOI Foundation.
           </div>
         </div>
       </div>
     </footer>
-
+    
     <!-- build:js scripts/scripts.js -->
     <script src="bower_components/angular/angular.js"></script>
 
@@ -75,6 +75,5 @@
       ga('send', 'pageview');
 
     </script>
-
   </body>
 </html>
