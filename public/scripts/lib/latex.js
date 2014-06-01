@@ -20,7 +20,8 @@ angular.module('Doi2BibApp').service('Latex', ['SpecialChars', function(SpecialC
     var indent = 0;
     return str.replace(/./g, function(c) {
       if (c === '{') {
-        return c + ( indent++ === 0 ? '\n  ' : '');
+        ++indent;
+        return c;
       } else if (c === '}') {
         return ( --indent === 0 ? '\n' : '') + c;
       } else if (c === ',' && indent === 1) {
