@@ -13,43 +13,19 @@
     <!-- endbuild -->
     <title>doi2bib</title>
   </head>
-  <body ng-controller="Doi2BibController">
+  <body>
     <div class="container">
-      <div class="row margin-top">
-        <div class="col-md-offset-4 col-md-4 centered">
-          <img src="imgs/doi2bib-logo.png" alt="doi2bib_logo" height="60" width="60" />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-offset-3 col-md-6 centered">
-          <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the BibTeX entry</h2>
-        </div>
-      </div>
-      <div class="row margin-top">
-        <div ng-attr-class="col-md-offset-4 col-md-4 {{error && 'has-error'}}">
-          <div class="input-group">
-            <input type="text" class="form-control" ng-model="doi"
-                   ng-keyup="$event.keyCode == 13 && toBib()"
-                   placeholder="Enter a digital object identifier ..."></input>
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row margin-top">
-        <div class="col-md-offset-2 col-md-8">
-          <pre ng-show="bib">{{bib}}</pre>
-          <div class="text-danger centered" ng-show="error">{{error}}</div>
-        </div>
-      </div>
+      <div ng-view></div>
     </div>
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-md-offset-3 col-md-6 centered">
-            &copy; 2014 doi2bib | <a href="terms.html">Terms and Conditions</a> | <a href="about.html">About</a> | Contact | Follow <a href="https://twitter.com/intent/user?screen_name=doi2bib">@doi2bib</a>
+            &copy; 2014 <a href="#">doi2bib</a> |
+            <a href="#terms">Terms and Conditions</a> |
+            <a href="#about">About</a> |
+            Contact |
+            Follow <a href="https://twitter.com/intent/user?screen_name=doi2bib">@doi2bib</a>
           </div>
           <div class="col-md-offset-3 col-md-6 centered">
             DOI is a registered trademark of the International DOI Foundation.
@@ -60,8 +36,10 @@
     
     <!-- build:js scripts/scripts.js -->
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
 
-    <script src="scripts/controllers/doi2bib.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/bib.js"></script>
     <script src="scripts/lib/latex.js"></script>
     <!-- endbuild -->
 

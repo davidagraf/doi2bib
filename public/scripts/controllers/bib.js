@@ -1,8 +1,7 @@
 'use strict';
 
-var doi2BibApp = angular.module('Doi2BibApp',[]);
-
-doi2BibApp.controller('Doi2BibController', ['$scope', '$http', 'Latex',
+angular.module('Doi2BibApp')
+.controller('BibCtrl', ['$scope', '$http', 'Latex',
     function($scope, $http, Latex) {
   $scope.toBib = function() {
     $http({ 

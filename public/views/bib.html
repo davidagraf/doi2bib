@@ -1,0 +1,29 @@
+<div class="row margin-top">
+  <div class="col-md-offset-4 col-md-4 centered">
+    <img src="imgs/doi2bib-logo.png" alt="doi2bib_logo" height="60" width="60" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6 centered">
+    <h2>doi2bib &#8212; give us a DOI and we'll do our best to get you the BibTeX entry</h2>
+  </div>
+</div>
+<div class="row margin-top">
+  <div ng-attr-class="col-md-offset-4 col-md-4 {{error && 'has-error'}}">
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="doi"
+             ng-keyup="$event.keyCode == 13 && toBib()"
+             placeholder="Enter a digital object identifier ..."></input>
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="toBib()">get BibTeX</button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="row margin-top">
+  <div class="col-md-offset-2 col-md-8">
+    <pre ng-show="bib">{{bib}}</pre>
+    <div class="text-danger centered" ng-show="error">{{error}}</div>
+  </div>
+</div>
