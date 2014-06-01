@@ -16,6 +16,7 @@ doi2bib
 ### Authors
 
 [David Graf](https://twitter.com/davidagraf)
+
 [Thomas Thurnherr](https://twitter.com/thurnherr)
 
 ### License
