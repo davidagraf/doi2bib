@@ -3,3 +3,4 @@ node_modules
 public/bower_components
 dist
 public/.DS_Store
+public/imgs/.DS_Store
