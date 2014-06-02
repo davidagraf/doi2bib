@@ -6,8 +6,12 @@ body {
   margin-bottom: 100px;
 }
 
-.centered {
+.text-center {
   text-align: center;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .margin-top {
