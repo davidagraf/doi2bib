@@ -1,22 +1,37 @@
 'use strict';
 
-angular.module('Doi2BibApp').service('Latex', ['LatexCharMap', 'LatexCharMap',
+angular.module('Doi2BibApp').service('Latex', ['LatexCharMap', 'LatinCharMap',
 function(LatexCharMap, LatinCharMap) {
 
   this.encode = function(str) {
+    return this.searchMap(str, LatexCharMap);
+  };
+  
+  this.searchMap = function(str, map) {
     return str.replace(/./g, function(c) {
-      if (LatexCharMap[c]) {
-        return LatexCharMap[c];
+      if (map[c]) {
+        return map[c];
       } else {
         return c;
       }
     });
-  };
+  }
 
   this.removeNA = function(str) {
     return str.replace(', pages={n/a–n/a', '');
   };
 
+  this.prettifyId = function(str) {
+    var authorYearTitle = this.getFirstWord(str.substring(str.indexOf("author={") + 8).split(/,/)[0])
+                          + str.substr(str.indexOf("year={") + 6, 4)
+                          + this.getFirstWord(str.substring(str.indexOf("title={") + 7).split(/,/)[0]);
+    return str.replace(str.split(/[{,]/)[1], authorYearTitle);
+  };
+   
+  this.getFirstWord = function(str) {
+    return this.searchMap(str, LatinCharMap).split(/[^a-zA-Z]+/)[0].toLowerCase();
+  };
+  
   this.indentBib = function(str) {
     var indent = 0;
     return str.replace(/./g, function(c) {
