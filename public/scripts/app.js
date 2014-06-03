@@ -13,7 +13,8 @@ angular.module('Doi2BibApp',['ngRoute'])
     templateUrl: 'views/help.html'
   })
   .when('/contact', {
-    templateUrl: 'views/contact.html'
+    templateUrl: 'views/contact.html',
+    controller: 'ContactCtrl'
   })
   .otherwise({
     templateUrl: 'views/bib.html',

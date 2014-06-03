@@ -1,8 +1,8 @@
 'use strict';
 
 var 
-  request = require('request'),
-  Q = require('q'),
+request = require('request'),
+Q = require('q'),
 
 
 genOptions = function(doi) {

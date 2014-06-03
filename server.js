@@ -4,7 +4,8 @@ var http = require('http'),
     express = require('express'),
     app = express(),
 
-    doi2bib = require('./app/doi2bib');
+    doi2bib = require('./app/doi2bib'),
+    utils = require('./app/utils');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -21,6 +22,11 @@ app.get('/doi2bib', function(req, res) {
       res.end(http.STATUS_CODES[500]);
     }
   });
+});
+
+app.post('/feedback', function(req, res) {
+  utils.sendFeedback(req.query.name, req.query.email, req.query.text);
+  res.end();
 });
 
 app.listen(
