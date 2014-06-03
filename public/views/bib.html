@@ -11,16 +11,20 @@
 </div>
 <div class="row margin-top">
   <div ng-attr-class="col-md-offset-4 col-md-4 {{error && 'has-error'}}">
-    <div class="input-group">
-      <input type="text" class="form-control" ng-model="doi"
-             ng-keyup="$event.keyCode == 13 && toBib()"
-             placeholder="Enter a digital object identifier ..."></input>
-      <span class="input-group-btn">
-        <button type="button" class="btn btn-default" ng-click="toBib()">
-          get BibTeX
-        </button>
-      </span>
-    </div>
+    <form name="bibForm">
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="doi"
+               ng-keyup="$event.keyCode == 13 && toBib()"
+               ng-pattern="/^10\..+\/.+$/"
+               placeholder="Enter a digital object identifier ..."></input>
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default"
+                  ng-click="toBib()">
+            get BibTeX
+          </button>
+        </span>
+      </div>
+    </form>
   </div>
 </div>
 <div class="row margin-top">

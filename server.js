@@ -11,17 +11,23 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/doi2bib', function(req, res) {
   res.set('Content-Type', 'application/x-bibtex');
-  doi2bib.doi2bib(req.query.doi).then(function(bib) {
-    res.end(bib);
-  }, function(errorCode) {
-    if (http.STATUS_CODES[errorCode]) {
-      res.writeHead(errorCode);
-      res.end(http.STATUS_CODES[errorCode]);
-    } else {
-      res.writeHead(500);
-      res.end(http.STATUS_CODES[500]);
-    }
-  });
+
+  if (!(new RegExp('^10\\..+\/.+$').test(req.query.doi))) {
+    res.writeHead(400);
+    res.end('Invalid DOI');
+  } else {
+    doi2bib.doi2bib(req.query.doi).then(function(bib) {
+      res.end(bib);
+    }, function(errorCode) {
+      if (http.STATUS_CODES[errorCode]) {
+        res.writeHead(errorCode);
+        res.end(http.STATUS_CODES[errorCode]);
+      } else {
+        res.writeHead(500);
+        res.end(http.STATUS_CODES[500]);
+      }
+    });
+  }
 });
 
 app.post('/feedback', function(req, res) {
