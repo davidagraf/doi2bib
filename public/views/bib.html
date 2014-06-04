@@ -14,13 +14,14 @@
     <form name="bibForm">
       <div class="input-group">
         <input type="text" class="form-control" ng-model="doi"
-               ng-keyup="$event.keyCode == 13 && toBib()"
+               ng-keyup="bibForm.$dirty && $event.keyCode == 13 && toBib()"
                ng-pattern="/^10\..+\/.+$/"
                placeholder="Enter a digital object identifier ..."
                autofocus>
         </input>
         <span class="input-group-btn">
           <button type="button" class="btn btn-default"
+                  ng-disabled="bibForm.$pristine"
                   ng-click="toBib()">
             get BibTeX
           </button>
