@@ -53,7 +53,9 @@ gulp.task('distpackage', function() {
     data = JSON.parse(data);
     data.devDependencies = [];
 
-    fs.mkdirSync('dist');
+    if (!fs.existsSync('dist')) {
+      fs.mkdirSync('dist');
+    }
     fs.writeFile('dist/package.json', JSON.stringify(data, null, 2), function(err) {
       if (err) {
         console.log(err);
@@ -73,7 +75,15 @@ gulp.task('distimages', function () {
         .pipe($.size());
 });
 
-gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distimages']);
+gulp.task('distfonts', function () {
+    return $.bowerFiles()
+        .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+        .pipe($.flatten())
+        .pipe(gulp.dest('dist/public/fonts'))
+        .pipe($.size());
+});
+
+gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distfonts', 'distimages']);
 
 gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
