@@ -9,6 +9,9 @@ doi2bib
 
 ### Run Development
     gulp serve
+
+### Create Distribution
+    gulp dist
     
 ### Run Production
     node server.js
