@@ -22,5 +22,17 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px;
+  height: 30px;
+}
+
+.site-footer-links {
+  margin:0;
+  list-style:none
+}
+
+.site-footer-links li {
+  display:inline-block;
+  line-height:16px;
+  margin-left:6px;
+  margin-right:6px
 }
