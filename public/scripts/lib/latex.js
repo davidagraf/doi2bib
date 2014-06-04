@@ -26,12 +26,16 @@ function(LatexCharMap, LatinCharMap) {
   };
 
   this.prettifyId = function(str) {
-    var authorYearTitle =
-      getFirstWord(str.substring(str.indexOf('author={') + 8).split(/[,}]/)[0]) +
-      str.substr(str.indexOf('year={') + 6, 4) +
-      getFirstWord(str.substring(str.indexOf('title={') + 7).split(/[,}]/)[0]);
+    if (str.indexOf('title={') < 0 || str.indexOf('author={') < 0 || str.indexOf('year={') < 0) {
+      return str.replace(str.split(/[{,]/)[1], str.substring(str.indexOf('DOI={') + 5).split('},')[0]);
+    } else {
+      var authorYearTitle =
+        getFirstWord(str.substring(str.indexOf('author={') + 8).split(/[,}]/)[0]) +
+        str.substr(str.indexOf('year={') + 6, 4) +
+        getFirstWord(str.substring(str.indexOf('title={') + 7).split(/[,}]/)[0].trim());
 
-    return str.replace(str.split(/[{,]/)[1], authorYearTitle);
+      return str.concat(authorYearTitle).replace(str.split(/[{,]/)[1], authorYearTitle);
+    }
   };
    
   this.indentBib = function(str) {
