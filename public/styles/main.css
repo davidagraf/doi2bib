@@ -25,14 +25,6 @@ footer {
   height: 30px;
 }
 
-.site-footer-links {
-  margin:0;
-  list-style:none
-}
-
-.site-footer-links li {
-  display:inline-block;
-  line-height:16px;
-  margin-left:6px;
-  margin-right:6px
+footer span {
+  margin: 0 5px;
 }
