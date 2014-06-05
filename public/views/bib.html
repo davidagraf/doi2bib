@@ -13,7 +13,8 @@
   <div ng-attr-class="col-md-offset-4 col-md-4 {{error && 'has-error'}}">
     <form name="bibForm">
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="doi"
+        <input type="text" class="form-control" maxlength="60"
+               ng-model="doi"
                ng-keyup="bibForm.$dirty && $event.keyCode == 13 && toBib()"
                ng-pattern="/^10\..+\/.+$/"
                placeholder="Enter a digital object identifier ..."
