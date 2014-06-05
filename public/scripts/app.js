@@ -17,3 +17,15 @@ angular.module('Doi2BibApp',['ngRoute'])
     controller: 'BibCtrl'
   });
 }]);
+
+// send all errors to google analytics
+/* global window */
+window.addEventListener('error', function(e) {
+  ga(
+    'send',
+    'event',
+    'js error',
+    e.message,
+    e.filename + ':  ' + e.lineno
+  );
+});
