@@ -83,6 +83,12 @@ gulp.task('distfonts', function () {
         .pipe($.size());
 });
 
+gulp.task('jison', function() {
+    return gulp.src('./utils/*.jison')
+        .pipe($.jison({moduleName: "bibparser", moduleType: "js"}))
+        .pipe(gulp.dest('./public/scripts/lib'));
+    });
+
 gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distfonts', 'distimages']);
 
 gulp.task('clean', function () {
