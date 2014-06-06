@@ -34,7 +34,7 @@ function(LatexCharMap, LatinCharMap) {
         str.substr(str.indexOf('year={') + 6, 4) +
         getFirstWord(str.substring(str.indexOf('title={') + 7).split(/[,}]/)[0].trim());
 
-      return str.concat(authorYearTitle).replace(str.split(/[{,]/)[1], authorYearTitle);
+      return str.replace(str.split(/[{,]/)[1], authorYearTitle);
     }
   };
    
