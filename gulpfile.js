@@ -13,15 +13,11 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('serve', function () {
-  $.nodemon({ script: 'server.js'});
+  $.nodemon({ script: 'app/server.js'});
 });
 
 gulp.task('distapp', function() {
-  var size = gulp.src('server.js').pipe(gulp.dest('dist')).pipe($.size());
-
-  size += gulp.src('app/**/*.js').pipe(gulp.dest('dist/app')).pipe($.size());
-
-  return size;
+  return gulp.src('app/**/*.js').pipe(gulp.dest('dist/app')).pipe($.size());
 });
 
 gulp.task('distpublic', function () {
