@@ -4,10 +4,10 @@ var http = require('http'),
     express = require('express'),
     app = express(),
 
-    doi2bib = require('./app/doi2bib'),
-    utils = require('./app/utils');
+    doi2bib = require('./doi2bib'),
+    utils = require('./utils');
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/../public'));
 
 app.get('/doi2bib', function(req, res) {
   res.set('Content-Type', 'application/x-bibtex');

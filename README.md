@@ -13,8 +13,8 @@ doi2bib
 ### Create Distribution
     gulp dist
     
-### Run Production
-    node server.js
+### Run Distribution
+    node app/server.js
 
 ### Authors
 
