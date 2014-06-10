@@ -12,7 +12,7 @@ gulp.task('jshint', function () {
         .pipe($.jshint.reporter(require('jshint-stylish')));
 });
 
-gulp.task('serve', function () {
+gulp.task('serve', ['jison'], function () {
   $.nodemon({ script: 'app/server.js'});
 
   gulp.watch('./utils/*.jison', ['jison']);
