@@ -26,6 +26,7 @@ function(LatexCharMap, LatinCharMap) {
   };
 
   this.prettifyId = function(str) {
+    /*
     if (str.indexOf('title={') < 0 || str.indexOf('author={') < 0 || str.indexOf('year={') < 0) {
       return str.replace(str.split(/[{,]/)[1], str.substring(str.indexOf('DOI={') + 5).split('},')[0]);
     } else {
@@ -35,7 +36,8 @@ function(LatexCharMap, LatinCharMap) {
         getFirstWord(str.substring(str.indexOf('title={') + 7).split(/[,}]/)[0].trim());
 
       return str.replace(str.split(/[{,]/)[1], authorYearTitle);
-    }
+    }*/
+    return str.replace('_', '');
   };
    
   this.indentBib = function(str) {

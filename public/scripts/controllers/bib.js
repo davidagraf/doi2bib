@@ -18,7 +18,8 @@ angular.module('Doi2BibApp')
         }
       }).
       success(function(data) {
-        $scope.bib = Latex.indentBib(Latex.encode(Latex.removeNA(Latex.prettifyId(data.trim()))));
+//        $scope.bib = Latex.indentBib(Latex.encode(Latex.removeNA(Latex.prettifyId(data.trim()))));
+        $scope.bib = Latex.encode(Latex.removeNA(Latex.prettifyId(data.trim())));
         $scope.workinprogress = false;
         ga('send', 'event', '/doi2bib success', $scope.doi);
       }).
