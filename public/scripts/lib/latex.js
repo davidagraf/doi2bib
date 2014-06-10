@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('Doi2BibApp').service('Latex', ['LatexCharMap', 'LatinCharMap',
-function(LatexCharMap, LatinCharMap) {
+angular.module('Doi2BibApp').service('Latex', ['LatexCharMap',
+function(LatexCharMap) {
 
   var
   searchMap = function(str, map) {
@@ -12,46 +12,10 @@ function(LatexCharMap, LatinCharMap) {
         return c;
       }
     });
-  },
-  getFirstWord = function(str) {
-    return searchMap(str, LatinCharMap).split(/[^a-zA-Z]+/)[0].toLowerCase();
   };
 
   this.encode = function(str) {
     return searchMap(str, LatexCharMap);
-  };
-
-  this.removeNA = function(str) {
-    return str.replace(', pages={n/a–n/a', '');
-  };
-
-  this.prettifyId = function(str) {
-    if (str.indexOf('title={') < 0 || str.indexOf('author={') < 0 || str.indexOf('year={') < 0) {
-      return str.replace(str.split(/[{,]/)[1], str.substring(str.indexOf('DOI={') + 5).split('},')[0]);
-    } else {
-      var authorYearTitle =
-        getFirstWord(str.substring(str.indexOf('author={') + 8).split(/[,}]/)[0]) +
-        str.substr(str.indexOf('year={') + 6, 4) +
-        getFirstWord(str.substring(str.indexOf('title={') + 7).split(/[,}]/)[0].trim());
-
-      return str.replace(str.split(/[{,]/)[1], authorYearTitle);
-    }
-  };
-   
-  this.indentBib = function(str) {
-    var indent = 0;
-    return str.replace(/./g, function(c) {
-      if (c === '{') {
-        ++indent;
-        return c;
-      } else if (c === '}') {
-        return ( --indent === 0 ? '\n' : '') + c;
-      } else if (c === ',' && indent === 1) {
-        return ',\n ';
-      } else {
-        return c;
-      }
-    });
   };
 }]);
 
@@ -135,8 +99,8 @@ angular.module("Doi2BibApp")
   "~": "\\~",
   "&": "\\&",
   "$": "\\$",
-  //"{": "\\{",
-  //"}": "\\}",
+  "{": "\\{",
+  "}": "\\}",
   "%": "\\%",
   "#": "\\#",
   "_": "\\_",

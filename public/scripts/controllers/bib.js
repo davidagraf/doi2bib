@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Doi2BibApp')
-.controller('BibCtrl', ['$scope', '$http', 'Latex', 'Bib',
-    function($scope, $http, Latex, Bib) {
+.controller('BibCtrl', ['$scope', '$http', 'Bib',
+    function($scope, $http, Bib) {
   $scope.toBib = function() {
     $scope.error = $scope.bib = undefined;
 
@@ -18,7 +18,6 @@ angular.module('Doi2BibApp')
         }
       }).
       success(function(data) {
-        //$scope.bib = Latex.indentBib(Latex.encode(Latex.removeNA(Latex.prettifyId(data.trim()))));
         try {
           var bib = new Bib(data);
           $scope.bib = bib.toPrettyString();

@@ -3,11 +3,19 @@
 /* global bibparser */
 
 angular.module('Doi2BibApp')
-.factory('Bib', [function() {
+.factory('Bib', ['Latex', function(Latex) {
   var
 
   BibClass = function(bibStr) {
     var bib = bibparser.parse(bibStr);
+
+    if (bib.pages === 'n/a–n/a') {
+      delete bib.pages;
+    }
+
+    if (bib.id) {
+      bib.id = bib.id.replace(/_/g, '');
+    }
 
     this.toPrettyString = function() {
       var result;
@@ -15,7 +23,7 @@ angular.module('Doi2BibApp')
       result = '@' + bib.type + '{' + bib.id;
 
       angular.forEach(bib.tags, function(value, key) {
-        result += ',\n  ' + key + '={' + (value.join ? value.join(', ') : value) + '}';
+        result += ',\n  ' + key + '= {' + Latex.encode(value.join ? value.join(', ') : value) + '}';
       }, result);
 
       result += '\n}';
