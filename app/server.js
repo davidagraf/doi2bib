@@ -3,10 +3,14 @@
 var http = require('http'),
     express = require('express'),
     app = express(),
+    env = process.env.NODE_ENV || 'development',
 
     doi2bib = require('./doi2bib'),
     utils = require('./utils');
 
+if ('development' === env) {
+  app.use(express.static(__dirname + '/../.tmp/public'));
+}
 app.use(express.static(__dirname + '/../public'));
 
 app.get('/doi2bib', function(req, res) {
