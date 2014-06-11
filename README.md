@@ -16,6 +16,17 @@ doi2bib
 ### Run Distribution
     node app/server.js
 
+### Testing
+#### Preparations
+    npm install -g protractor
+    webdriver-manager update
+
+#### Running Tests
+    gulp serve
+    webdriver-manager start
+    protractor test/protractor-conf.js
+    
+
 ### Authors
 
 [David Graf](https://twitter.com/davidagraf)

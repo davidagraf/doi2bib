@@ -41,7 +41,8 @@
     "gulp-size": "^0.3.1",
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "^0.4.3",
-    "jshint-stylish": "^0.2.0"
+    "jshint-stylish": "^0.2.0",
+    "protractor": "^0.24.1"
   },
   "bundleDependencies": [],
   "private": true,

@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 var $ = require('gulp-load-plugins')();
 
 gulp.task('jshint', function () {
-    return gulp.src(['*.js', 'app/**/*.js', 'public/scripts/**/*.js'])
+    return gulp.src(['*.js', 'app/**/*.js', 'public/scripts/**/*.js', 'test/**/*.js'])
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')));
 });
