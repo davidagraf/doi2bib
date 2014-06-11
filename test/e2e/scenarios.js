@@ -1,17 +1,32 @@
-/* global describe,browser,element,by,it,expect */
+/* global describe,browser,element,by,it,expect,beforeEach */
 'use strict';
 
+var fs = require('fs');
+
 describe('bib app', function() {
-  browser.get('index.html');
 
-  element(by.model('doi')).sendKeys('10.1063/1.449203');
+  var dois = JSON.parse(fs.readFileSync(__dirname + '/testcases.json', 'utf8'));
 
-  element(by.buttonText('get BibTeX')).click();
-
-  var bibEl = element(by.binding('bib'));
-
-  it('should returns an article', function() {
-    expect(bibEl.getText()).toMatch(/^@article/);
+  beforeEach(function() {
+    browser.get('index.html');
   });
+
+
+  var doiInput = element(by.model('doi')),
+      button = element(by.buttonText('get BibTeX')),
+      bibEl = element(by.binding('bib')),
+      i,
+
+  doTest = function(doi) {
+    it('check doi ' + doi, function() {
+      doiInput.sendKeys(doi);
+      button.click();
+      expect(bibEl.getText()).toMatch(/^@article/);
+    });
+  };
+
+  for(i = 0; i < dois.length; ++i) {
+    doTest(dois[i]);
+  }
 
 });
