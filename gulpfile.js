@@ -14,20 +14,22 @@ gulp.task('jshint', function () {
         .pipe($.jshint.reporter(require('jshint-stylish')));
 });
 
-gulp.task('serve', function () {
+gulp.task('serve', ['jison'], function () {
   $.nodemon({ script: 'app/server.js'});
+
+  gulp.watch('./utils/*.jison', ['jison']);
 });
 
 gulp.task('distapp', function() {
   return gulp.src('app/**/*.js').pipe(gulp.dest('dist/app')).pipe($.size());
 });
 
-gulp.task('distpublic', function () {
+gulp.task('distpublic', ['jshint', 'jison'], function () {
     var jsFilter = $.filter('**/*.js');
     var cssFilter = $.filter('**/*.css');
 
     return gulp.src('public/**/*.html')
-        .pipe($.useref.assets({searchPath: 'public'}))
+        .pipe($.useref.assets({searchPath: ['public', '.tmp/public']}))
         .pipe(jsFilter)
         .pipe($.uglify())
         .pipe(jsFilter.restore())
@@ -79,6 +81,12 @@ gulp.task('distfonts', function () {
         .pipe($.flatten())
         .pipe(gulp.dest('dist/public/fonts'))
         .pipe($.size());
+});
+
+gulp.task('jison', function() {
+    return gulp.src('./utils/*.jison')
+        .pipe($.jison({moduleName: 'bibparser', moduleType: 'js'}))
+        .pipe(gulp.dest('./.tmp/public/scripts/lib'));
 });
 
 gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distfonts', 'distimages']);

@@ -3,3 +3,4 @@ node_modules
 public/bower_components
 dist
 .DS_Store
+.tmp

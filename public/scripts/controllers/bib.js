@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('Doi2BibApp')
-.controller('BibCtrl', ['$scope', '$http', 'Latex',
-    function($scope, $http, Latex) {
+.controller('BibCtrl', ['$scope', '$http', 'Bib',
+    function($scope, $http, Bib) {
   $scope.toBib = function() {
     $scope.error = $scope.bib = undefined;
 
@@ -18,10 +18,15 @@ angular.module('Doi2BibApp')
         }
       }).
       success(function(data) {
-//        $scope.bib = Latex.indentBib(Latex.encode(Latex.removeNA(Latex.prettifyId(data.trim()))));
-        $scope.bib = Latex.encode(Latex.removeNA(Latex.prettifyId(data.trim())));
+        try {
+          var bib = new Bib(data);
+          $scope.bib = bib.toPrettyString();
+          ga('send', 'event', '/doi2bib success', $scope.doi);
+        } catch (err) {
+          $scope.error = err.message;
+          ga('send', 'event', '/doi2bib error', $scope.doi, $scope.error);
+        }
         $scope.workinprogress = false;
-        ga('send', 'event', '/doi2bib success', $scope.doi);
       }).
       error(function(data, status/*, headers, config*/) {
         $scope.error = data;
