@@ -3,7 +3,9 @@
 var gulp = require('gulp'),
     fs = require('fs'),
     protractor = require('gulp-protractor').protractor,
+/*jshint camelcase: false */
     webdriverUpdate = require('gulp-protractor').webdriver_update;
+/*jshint camelcase: true */
 
 // load plugins
 var $ = require('gulp-load-plugins')();
