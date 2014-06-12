@@ -17,14 +17,8 @@ doi2bib
     node app/server.js
 
 ### Testing
-#### Preparations
-    npm install -g protractor
-    webdriver-manager update
-
-#### Running Tests
     gulp serve
-    webdriver-manager start
-    protractor test/protractor-conf.js
+    gulp protractor
     
 
 ### Authors

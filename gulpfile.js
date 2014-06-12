@@ -1,7 +1,9 @@
 'use strict';
 
 var gulp = require('gulp'),
-    fs = require('fs');
+    fs = require('fs'),
+    protractor = require('gulp-protractor').protractor,
+    webdriverUpdate = require('gulp-protractor').webdriver_update;
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -82,5 +84,15 @@ gulp.task('distfonts', function () {
 gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distfonts', 'distimages']);
 
 gulp.task('clean', function () {
-    return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+});
+
+gulp.task('webdriver:update', webdriverUpdate);
+
+gulp.task('protractor', ['webdriver:update'], function() {
+  return gulp.src('test/e2e/**/*.js')
+    .pipe(protractor({
+      configFile: 'test/protractor-conf.js'
+    }))
+    .on('error', function(e) {throw e;});
 });
