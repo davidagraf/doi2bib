@@ -23,7 +23,7 @@ angular.module('Doi2BibApp')
       result = '@' + bib.type + '{' + bib.id;
 
       angular.forEach(bib.tags, function(value, key) {
-        result += ',\n  ' + key + '= {' + Latex.encode(value.join ? value.join(', ') : value) + '}';
+        result += ',\n  ' + key + '= {' + (value.join ? value.join(', ') : value) + '}';
       }, result);
 
       result += '\n}';
