@@ -3,7 +3,7 @@
 /* global bibparser */
 
 angular.module('Doi2BibApp')
-.factory('Bib', ['Latex', function(Latex) {
+.factory('Bib', [function() {
   var
 
   BibClass = function(bibStr) {
