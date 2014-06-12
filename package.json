@@ -39,10 +39,12 @@
     "gulp-jshint": "^1.6.1",
     "gulp-load-plugins": "^0.5.1",
     "gulp-nodemon": "^1.0.3",
+    "gulp-protractor": "0.0.7",
     "gulp-size": "^0.3.1",
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "^0.4.3",
-    "jshint-stylish": "^0.2.0"
+    "jshint-stylish": "^0.2.0",
+    "protractor": "^0.24.1"
   },
   "bundleDependencies": [],
   "private": true,

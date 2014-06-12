@@ -16,6 +16,11 @@ doi2bib
 ### Run Distribution
     node app/server.js
 
+### Testing
+    gulp serve
+    gulp protractor
+    
+
 ### Authors
 
 [David Graf](https://twitter.com/davidagraf)

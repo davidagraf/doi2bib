@@ -1,13 +1,17 @@
 'use strict';
 
 var gulp = require('gulp'),
-    fs = require('fs');
+    fs = require('fs'),
+    protractor = require('gulp-protractor').protractor,
+/*jshint camelcase: false */
+    webdriverUpdate = require('gulp-protractor').webdriver_update;
+/*jshint camelcase: true */
 
 // load plugins
 var $ = require('gulp-load-plugins')();
 
 gulp.task('jshint', function () {
-    return gulp.src(['*.js', 'app/**/*.js', 'public/scripts/**/*.js'])
+    return gulp.src(['*.js', 'app/**/*.js', 'public/scripts/**/*.js', 'test/**/*.js'])
         .pipe($.jshint())
         .pipe($.jshint.reporter(require('jshint-stylish')));
 });
@@ -90,5 +94,15 @@ gulp.task('jison', function() {
 gulp.task('dist', ['distapp', 'distpublic', 'distpackage', 'distfonts', 'distimages']);
 
 gulp.task('clean', function () {
-    return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+  return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+});
+
+gulp.task('webdriver:update', webdriverUpdate);
+
+gulp.task('protractor', ['webdriver:update'], function() {
+  return gulp.src('test/e2e/**/*.js')
+    .pipe(protractor({
+      configFile: 'test/protractor-conf.js'
+    }))
+    .on('error', function(e) {throw e;});
 });
