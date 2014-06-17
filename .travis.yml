@@ -5,5 +5,5 @@ before_script:
   - gulp serve
   - sleep 3
 script:
-  - gulp test
+  - gulp jshint
   - gulp protractor

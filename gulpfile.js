@@ -106,5 +106,3 @@ gulp.task('protractor', ['webdriver:update'], function() {
     }))
     .on('error', function(e) {throw e;});
 });
-
-gulp.task('test', ['jshint']);
