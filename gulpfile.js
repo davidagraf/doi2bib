@@ -99,7 +99,7 @@ gulp.task('clean', function () {
 
 gulp.task('webdriver:update', webdriverUpdate);
 
-gulp.task('protractor', ['webdriver:update'], function() {
+gulp.task('protractor', ['webdriver:update', 'serve'], function() {
   return gulp.src('test/e2e/**/*.js')
     .pipe(protractor({
       configFile: 'test/protractor-conf.js'
