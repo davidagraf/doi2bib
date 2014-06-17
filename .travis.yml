@@ -1,3 +1,9 @@
 language: node_js
 node_js:
   - '0.10'
+before_script:
+  - gulp serve
+  - sleep 3
+script:
+  - gulp test
+  - gulp protractor
