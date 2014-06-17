@@ -48,5 +48,8 @@
   },
   "bundleDependencies": [],
   "private": true,
-  "main": "app/server.js"
+  "main": "app/server.js",
+  "scripts": {
+    "test": "gulp test"
+  }
 }
