@@ -5,12 +5,12 @@
 %%
 
 \s+                   /* skip whitespace */
-[^@{},=]+              return 'TEXT'
-"@"                   return '@'
-"{"                   return '{'
-"}"                   return '}'
-","                   return ','
-"="                   return '='
+([^\\@{},=]|\\.(\{[a-zA-Z]+\})?)+ return 'TEXT'
+"@"                               return '@'
+"{"                               return '{'
+"}"                               return '}'
+","                               return ','
+"="                               return '='
 
 /lex
 
