@@ -109,3 +109,5 @@ gulp.task('protractor', ['webdriver:update', 'serve'], function() {
       process.exit(); // top process when testing is over
     });
 });
+
+gulp.task('test', ['jshint', 'protractor']);

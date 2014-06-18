@@ -1,4 +1,4 @@
-/* global describe,browser,element,by,it,expect,beforeEach */
+/* global describe,browser,element,by,it,expect,beforeEach,afterEach */
 'use strict';
 
 var fs = require('fs');
@@ -13,10 +13,19 @@ describe('bib app', function() {
     browser.get('index.html');
   });
 
+  afterEach(function() {
+    browser.manage().logs().get('browser').then(function(browserLog) {
+      expect(browserLog.length).toEqual(0);
+      // Uncomment to actually see the log.
+      // console.log('log: ' + require('util').inspect(browserLog));
+    });
+  });
+
 
   var doiInput = element(by.model('doi')),
       button = element(by.buttonText('get BibTeX')),
       bibEl = element(by.binding('bib')),
+      errorEl = element(by.binding('error')),
       i,
 
   doTest = function(doi, check) {
@@ -24,6 +33,7 @@ describe('bib app', function() {
       doiInput.sendKeys(doi);
       button.click();
       check(bibEl.getText());
+      expect(errorEl).toBe(null);
     });
   },
   
