@@ -17,7 +17,7 @@ doi2bib
     node app/server.js
 
 ### Testing
-    gulp serve
+    gulp jshint
     gulp protractor
     
 

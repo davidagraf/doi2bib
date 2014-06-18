@@ -104,5 +104,8 @@ gulp.task('protractor', ['webdriver:update', 'serve'], function() {
     .pipe(protractor({
       configFile: 'test/protractor-conf.js'
     }))
-    .on('error', function(e) {throw e;});
+    .on('error', function(e) {throw e;})
+    .on('end', function() {
+      process.exit(); // top process when testing is over
+    });
 });
