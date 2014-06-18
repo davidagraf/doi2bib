@@ -5,8 +5,8 @@ var fs = require('fs');
 
 describe('bib app', function() {
 
-  var articles = JSON.parse(fs.readFileSync(__dirname + '/articles.json', 'utf8')),
-      inproceedings = JSON.parse(fs.readFileSync(__dirname + '/inproceedings.json', 'utf8')),
+  var //articles = JSON.parse(fs.readFileSync(__dirname + '/articles.json', 'utf8')),
+      //inproceedings = JSON.parse(fs.readFileSync(__dirname + '/inproceedings.json', 'utf8')),
       incollections = JSON.parse(fs.readFileSync(__dirname + '/incollections.json', 'utf8'));
 
   beforeEach(function() {
@@ -27,13 +27,13 @@ describe('bib app', function() {
     });
   },
   
-  articleCheck = function(text) {
-    expect(text).toMatch(/^@article/);
-  },
+  //articleCheck = function(text) {
+  //  expect(text).toMatch(/^@article/);
+  //},
 
-  inproceedingCheck = function(text) {
-    expect(text).toMatch(/^@inproceeding/);
-  },
+  //inproceedingCheck = function(text) {
+  //  expect(text).toMatch(/^@inproceeding/);
+  //},
 
   incollectionCheck = function(text) {
     expect(text).toMatch(/^@incollection/);
