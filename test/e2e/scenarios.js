@@ -25,7 +25,6 @@ describe('bib app', function() {
   var doiInput = element(by.model('doi')),
       button = element(by.buttonText('get BibTeX')),
       bibEl = element(by.binding('bib')),
-      errorEl = element(by.binding('error')),
       i,
 
   doTest = function(doi, check) {
@@ -33,7 +32,6 @@ describe('bib app', function() {
       doiInput.sendKeys(doi);
       button.click();
       check(bibEl.getText());
-      expect(errorEl).toBe(null);
     });
   },
   
