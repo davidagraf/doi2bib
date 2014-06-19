@@ -6,3 +6,6 @@ before_script:
   - bower install
 script:
   - gulp test
+branches:
+  only:
+    - master
