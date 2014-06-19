@@ -21,17 +21,17 @@ angular.module('Doi2BibApp')
         try {
           var bib = new Bib(data);
           $scope.bib = bib.toPrettyString();
-          //ga('send', 'event', '/doi2bib success', $scope.doi);
+          ga('send', 'event', '/doi2bib success', $scope.doi);
         } catch (err) {
           $scope.error = err.message;
-          //ga('send', 'event', '/doi2bib error', $scope.doi, $scope.error);
+          ga('send', 'event', '/doi2bib error', $scope.doi, $scope.error);
         }
         $scope.workinprogress = false;
       }).
-      error(function(data/*, status, headers, config*/) {
+      error(function(data, status/*, headers, config*/) {
         $scope.error = data;
         $scope.workinprogress = false;
-        //ga('send', 'event', '/doi2bib error', $scope.doi, data, status);
+        ga('send', 'event', '/doi2bib error', $scope.doi, data, status);
       });
     }
   };
