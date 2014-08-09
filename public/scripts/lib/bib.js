@@ -50,5 +50,5 @@ angular.module('Doi2BibApp')
   return BibClass;
 }])
 .constant('SpecialChars', {
-  'à': '\\\'a'
+  'à': '\\`a'
 });
