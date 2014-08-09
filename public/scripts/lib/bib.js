@@ -41,6 +41,10 @@ angular.module('Doi2BibApp')
 
       return result;
     };
+
+    this.getURL = function() {
+      return bib.tags.url;
+    };
   };
 
   return BibClass;

@@ -35,6 +35,7 @@
   <div class="col-md-offset-2 col-md-8 text-center">
     <span class="glyphicon glyphicon-refresh spin" ng-show="workinprogress"></span>
     <pre class="text-left" ng-show="bib">{{bib}}</pre>
+    <a ng-show="url" href="{{url}}" target="_blank">{{url}}</a>
     <div class="text-danger" ng-show="error">{{error}}</div>
   </div>
 </div>

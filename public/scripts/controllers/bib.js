@@ -4,7 +4,7 @@ angular.module('Doi2BibApp')
 .controller('BibCtrl', ['$scope', '$http', 'Bib',
     function($scope, $http, Bib) {
   $scope.toBib = function() {
-    $scope.error = $scope.bib = undefined;
+    $scope.error = $scope.bib = $scope.url = undefined;
 
     if($scope.bibForm.$invalid) {
       $scope.error = 'Invalid DOI';
@@ -21,6 +21,7 @@ angular.module('Doi2BibApp')
         try {
           var bib = new Bib(data);
           $scope.bib = bib.toPrettyString();
+          $scope.url = bib.getURL();
           ga('send', 'event', '/doi2bib success', $scope.doi);
         } catch (err) {
           $scope.error = err.message;
