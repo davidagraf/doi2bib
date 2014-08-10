@@ -10,15 +10,15 @@ angular.module('Doi2BibApp')
     var bib = bibparser.parse(bibStr),
         encodeSpecialChars;
 
-    if (bib.pages === 'n/a-n/a') {
-      delete bib.pages;
+    /* pages specific */
+    if (bib.tags.pages === 'n/a-n/a') {
+      delete bib.tags.pages;
     }
-    
-    /* geht nicht
-    if (bib.pages) {
-      bib.pages = bib.pages.replace(/\-/g, '--');
-    }*/
+    if (bib.tags.pages) {
+      bib.tags.pages = bib.tags.pages.replace(/\-/g, '--');
+    }
 
+    /* id specific */
     if (bib.id) {
       bib.id = bib.id.replace(/_/g, '');
     }
