@@ -10,9 +10,14 @@ angular.module('Doi2BibApp')
     var bib = bibparser.parse(bibStr),
         encodeSpecialChars;
 
-    if (bib.pages === 'n/a–n/a') {
+    if (bib.pages === 'n/a-n/a') {
       delete bib.pages;
     }
+    
+    /* geht nicht
+    if (bib.pages) {
+      bib.pages = bib.pages.replace(/\-/g, '--');
+    }*/
 
     if (bib.id) {
       bib.id = bib.id.replace(/_/g, '');
@@ -51,5 +56,9 @@ angular.module('Doi2BibApp')
 }])
 .constant('SpecialChars', {
   'à': '\\`a',
-  '-': '--'
+  'ô': '\\^o',
+  'ê': '\\^e',
+  'â': '\\^a',
+  '®': '{\\textregistered}',
+  'ç': '\\c{c}'
 });
