@@ -14,7 +14,7 @@ angular.module('Doi2BibApp')
     if (bib.tags.pages === 'n/a-n/a') {
       delete bib.tags.pages;
     }
-    if (bib.tags.pages) {
+    if (bib.tags.pages && bib.tags.pages.indexOf('--') == -1) {
       bib.tags.pages = bib.tags.pages.replace(/\-/g, '--');
     }
 
