@@ -5,7 +5,7 @@
 %%
 
 \s+                   /* skip whitespace */
-([^\\@{},=]|\\.(\{[a-zA-Z]+\})?)+ return 'TEXT'
+([^\\@{},=]|\\.(\{[a-zA-Z]+\})?|\{\\([a-zA-Z]+|.\{[\\a-zA-Z]+\})\})+ return 'TEXT'
 "@"                               return '@'
 "{"                               return '{'
 "}"                               return '}'
