@@ -5,7 +5,7 @@
 %%
 
 \s+                   /* skip whitespace */
-([^\\@{},=]|\\.(\{[a-zA-Z]+\})?|\{\\([a-zA-Z]+|.\{[\\a-zA-Z]+\})\})+ return 'TEXT'
+[^@{},=]+                         return 'TEXT'
 "@"                               return '@'
 "{"                               return '{'
 "}"                               return '}'
@@ -13,15 +13,6 @@
 "="                               return '='
 
 /lex
-
-/* operator associations and precedence */
-
-/*
-%left '+' '-'
-%left '*' '/'
-%left '^'
-%left UMINUS
-*/
 
 %start expressions
 
@@ -41,7 +32,7 @@ bibtex
             type: $2,
             id: $4,
             tags: $5
-          }
+          };
         }
     ;
 
@@ -62,18 +53,37 @@ tags
         }
     |
         {
-          $$ = {}
+          $$ = {};
         }
     ;
 
 taglist
-    : taglist ',' TEXT
+    : taglist ',' tagvalue
         {
           $$ = $1;
           $$.push($3);
         }
+    | tagvalue
+        {
+          $$ = [$1];
+        }
+    ;
+
+tagvalue
+    : TEXT  '{' tagvalue '}' tagvalue
+        {
+          $$ = [$1, $2, $3, $4, $5].join('');
+        }
+    | '{' tagvalue '}' tagvalue
+        {
+          $$ = [$1, $2, $3, $4].join('');
+        }
     | TEXT
         {
-          $$ = [$1]
+          $$ = $1;
+        }
+    |
+        {
+          $$ = '';
         }
     ;
