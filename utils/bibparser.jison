@@ -70,17 +70,24 @@ taglist
     ;
 
 tagvalue
-    : TEXT  '{' tagvalue '}' tagvalue
+    : tagvaluetext  '{' tagvalue '}' tagvalue
         {
           $$ = [$1, $2, $3, $4, $5].join('');
         }
-    | '{' tagvalue '}' tagvalue
-        {
-          $$ = [$1, $2, $3, $4].join('');
-        }
-    | TEXT
+    | tagvaluetext
         {
           $$ = $1;
+        }
+    ;
+
+tagvaluetext
+    : TEXT tagvaluetext
+        {
+          $$ = [$1, $2].join('');
+        }
+    | "=" tagvaluetext
+        {
+          $$ = [$1, $2].join('');
         }
     |
         {
