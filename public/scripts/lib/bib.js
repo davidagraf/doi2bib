@@ -39,7 +39,7 @@ angular.module('Doi2BibApp')
 
       angular.forEach(bib.tags, function(value, key) {
         result += ',\n  ' + key + '= {' +
-                  encodeSpecialChars(value.join ? value.join(', ') : value) + '}';
+                  encodeSpecialChars(value.join ? value.join(', ') : value).replace(/\$\\lbrace\$/g, '{').replace(/\$\\rbrace\$/g, '}') + '}';
       }, result);
 
       result += '\n}';
