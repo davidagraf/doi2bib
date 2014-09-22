@@ -16,13 +16,12 @@
         <input type="text" class="form-control" maxlength="60"
                ng-model="doi"
                ng-keyup="bibForm.$dirty && $event.keyCode == 13 && toBib()"
-               ng-pattern="/^10\..+\/.+$/"
                placeholder="Enter a digital object identifier ..."
                autofocus>
         </input>
         <span class="input-group-btn">
           <button type="button" class="btn btn-default"
-                  ng-disabled="bibForm.$pristine"
+                  ng-disabled="!doi && bibForm.$pristine"
                   ng-click="toBib()">
             get BibTeX
           </button>

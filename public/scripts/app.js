@@ -12,10 +12,28 @@ angular.module('Doi2BibApp',['ngRoute'])
   .when('/help', {
     templateUrl: 'views/help.html'
   })
-  .otherwise({
+  .when('/doi', {
     templateUrl: 'views/bib.html',
     controller: 'BibCtrl'
+  })
+  .when('/doi/:doi*', {
+    templateUrl: 'views/bib.html',
+    controller: 'BibCtrl'
+  })
+  .otherwise({
+    redirectTo: '/doi'
   });
+}])
+.service('locationChanger', ['$rootScope', '$route', '$location', function($rootScope, $route, $location) {
+  this.navigateWithoutReload = function(url) {
+    var lastRoute, unsub;
+    $location.url(url);
+    lastRoute = $route.current;
+    unsub = $rootScope.$on('$locationChangeSuccess', function() {
+        $route.current = lastRoute; // fake this to make the route logic think nothing changed
+        unsub();
+    });
+  };
 }]);
 
 // send all errors to google analytics

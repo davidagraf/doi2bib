@@ -1,12 +1,21 @@
 'use strict';
 
 angular.module('Doi2BibApp')
-.controller('BibCtrl', ['$scope', '$http', 'Bib',
-    function($scope, $http, Bib) {
+.controller('BibCtrl', ['$scope', '$http', '$timeout', '$routeParams', '$location', 'Bib', 'locationChanger',
+    function($scope, $http, $timeout, $routeParams, $location, Bib, locationChanger) {
+
+  if ($routeParams.doi) {
+    $scope.doi = $routeParams.doi;
+    $timeout(function() {
+      $scope.toBib();
+    });
+  }
+
+
   $scope.toBib = function() {
     $scope.error = $scope.bib = $scope.url = undefined;
 
-    if($scope.bibForm.$invalid) {
+    if(!$scope.doi.match(/^10\..+\/.+$/)) {
       $scope.error = 'Invalid DOI';
     } else {
       $scope.workinprogress = true;
@@ -22,6 +31,7 @@ angular.module('Doi2BibApp')
           var bib = new Bib(data);
           $scope.bib = bib.toPrettyString();
           $scope.url = bib.getURL();
+          locationChanger.navigateWithoutReload('/doi/' + $scope.doi);
           ga('send', 'event', '/doi2bib success', $scope.doi);
         } catch (err) {
           $scope.error = err.message;
@@ -36,4 +46,5 @@ angular.module('Doi2BibApp')
       });
     }
   };
+
 }]);
