@@ -5,38 +5,56 @@ var http = require('http'),
     app = express(),
     env = process.env.NODE_ENV || 'development',
 
-    doi2bib = require('./doi2bib'),
-    utils = require('./utils');
+    doi2bib = require('./doi2bib');
 
 if ('development' === env) {
   app.use(express.static(__dirname + '/../.tmp/public'));
 }
 app.use(express.static(__dirname + '/../public'));
 
+var
+genErrorHandler = function(res) {
+  return function(errorCode) {
+    if (http.STATUS_CODES[errorCode]) {
+      res.writeHead(errorCode);
+      res.end(http.STATUS_CODES[errorCode]);
+    } else {
+      res.writeHead(500);
+      res.end(http.STATUS_CODES[500]);
+    }
+  };
+},
+genSuccessHandler = function(res) {
+  return function(bib) {
+    res.end(bib);
+  };
+};
+
 app.get('/doi2bib', function(req, res) {
   res.set('Content-Type', 'application/x-bibtex');
 
-  if (!(new RegExp('^10\\..+\/.+$').test(req.query.doi))) {
+  if (!/^10\..+\/.+$/.test(req.query.id)) {
     res.writeHead(400);
     res.end('Invalid DOI');
   } else {
-    doi2bib.doi2bib(req.query.doi).then(function(bib) {
-      res.end(bib);
-    }, function(errorCode) {
-      if (http.STATUS_CODES[errorCode]) {
-        res.writeHead(errorCode);
-        res.end(http.STATUS_CODES[errorCode]);
-      } else {
-        res.writeHead(500);
-        res.end(http.STATUS_CODES[500]);
-      }
-    });
+    doi2bib.doi2bib(req.query.id).then(genSuccessHandler(res), genErrorHandler(res));
   }
 });
 
-app.post('/feedback', function(req, res) {
-  utils.sendFeedback(req.query.name, req.query.email, req.query.text);
-  res.end();
+app.get('/pmid2bib', function(req, res) {
+  res.set('Content-Type', 'application/x-bibtex');
+
+
+  if (!/^\d+$|^PMC\d+(\.\d+)?$/.test(req.query.id)) {
+    res.writeHead(400);
+    res.end('Invalid PMID');
+  } else {
+    doi2bib.pmid2doi(req.query.id).
+      then(function(doi) {
+        return doi2bib.doi2bib(doi);
+      }).
+      then(genSuccessHandler(res)).fail(genErrorHandler(res));
+  }
 });
 
 app.listen(

@@ -14,16 +14,23 @@ angular.module('Doi2BibApp')
 
   $scope.toBib = function() {
     $scope.error = $scope.bib = $scope.url = undefined;
+    var url;
 
-    if(!$scope.doi.match(/^10\..+\/.+$/)) {
-      $scope.error = 'Invalid DOI';
+    if ($scope.doi.match(/^10\..+\/.+$/)) {
+      url = '/doi2bib';
+    } else if ($scope.doi.match(/^\d+$|^PMC\d+(\.\d+)?$/)) {
+      url = '/pmid2bib';
+    }
+
+    if(!url) {
+      $scope.error = 'Invalid ID. Must be DOI or PMID.';
     } else {
       $scope.workinprogress = true;
       $http({
         method: 'GET',
-        url: '/doi2bib',
+        url: url,
         params: {
-          doi: $scope.doi
+          id: $scope.doi
         }
       }).
       success(function(data) {
