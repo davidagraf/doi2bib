@@ -2,15 +2,38 @@
 
 /* lexical grammar */
 %lex
+%x value
 %%
-
-\s+                   /* skip whitespace */
-[^@{},=]+                         return 'TEXT'
-"@"                               return '@'
-"{"                               return '{'
-"}"                               return '}'
-","                               return ','
-"="                               return '='
+<INITIAL>\s+                      /*return 'WS'*/
+<INITIAL>[^@{},=]+                return 'TEXT'
+<value>[^{},]+                    return 'TEXT';
+<INITIAL>"@"                      return '@'
+<*>"{"                            {
+                                    this.curleyCount = this.curleyCount || 0;
+                                    ++this.curleyCount;
+                                    if (this.curleyCount === 2) {
+                                      this.begin("value");
+                                    }
+                                    if (this.curleyCount > 2) {
+                                      return 'TEXT';
+                                    } else {
+                                      return '{';
+                                    }
+                                  }
+<*>"}"                            {
+                                    this.curleyCount = this.curleyCount || 0;
+                                    --this.curleyCount;
+                                    if (this.curleyCount === 1) {
+                                      this.popState();
+                                    }
+                                    if (this.curleyCount > 1) {
+                                      return 'TEXT';
+                                    } else {
+                                      return '}';
+                                    }
+                                  }
+<*>","                            return ','
+<INITIAL>"="                      return '='
 
 /lex
 
@@ -70,22 +93,7 @@ taglist
     ;
 
 tagvalue
-    : tagvaluetext  '{' tagvalue '}' tagvalue
-        {
-          $$ = [$1, $2, $3, $4, $5].join('');
-        }
-    | tagvaluetext
-        {
-          $$ = $1;
-        }
-    ;
-
-tagvaluetext
-    : TEXT tagvaluetext
-        {
-          $$ = [$1, $2].join('');
-        }
-    | "=" tagvaluetext
+    : TEXT tagvalue
         {
           $$ = [$1, $2].join('');
         }

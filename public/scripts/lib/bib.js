@@ -38,7 +38,7 @@ angular.module('Doi2BibApp')
       result = '@' + bib.type + '{' + bib.id;
 
       angular.forEach(bib.tags, function(value, key) {
-        result += ',\n  ' + key + '= {' +
+        result += ',\n  ' + key + ' = {' +
                   encodeSpecialChars(value.join ? value.join(', ') : value) + '}';
       }, result);
 

@@ -35,8 +35,8 @@ pmid2doi = function(pmid) {
   request(pmid2doiOptions(pmid), function(error, response, body) {
     if (response.statusCode !== 200) {
       deferred.reject(response.statusCode);
-    } else if (!body.records || !body.records.length > 0) {
-      deferred.reject(204);
+    } else if (!body.records || !body.records[0]) {
+      deferred.reject(204); // not found
     } else {
       deferred.resolve(body.records[0].doi);
     }
