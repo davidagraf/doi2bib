@@ -68,11 +68,11 @@ gulp.task('distpackage', function() {
 
 gulp.task('distimages', function () {
     return gulp.src('public/imgs/**/*')
-        .pipe($.cache($.imagemin({
-            optimizationLevel: 3,
-            progressive: true,
-            interlaced: true
-        })))
+        //.pipe($.cache($.imagemin({
+        //    optimizationLevel: 3,
+        //    progressive: true,
+        //    interlaced: true
+        //})))
         .pipe(gulp.dest('dist/public/imgs'))
         .pipe($.size());
 });
