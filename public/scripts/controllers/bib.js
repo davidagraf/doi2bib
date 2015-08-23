@@ -15,10 +15,15 @@ angular.module('Doi2BibApp')
   $scope.toBib = function() {
     $scope.error = $scope.bib = $scope.url = undefined;
     var url;
+    var doiToSend = $scope.doi;
 
-    if ($scope.doi.match(/^10\..+\/.+$/)) {
+    if (doiToSend.match(/^doi:/)) {
+      doiToSend = doiToSend.substring(4);
+    }
+
+    if (doiToSend.match(/^10\..+\/.+$/)) {
       url = '/doi2bib';
-    } else if ($scope.doi.match(/^\d+$|^PMC\d+(\.\d+)?$/)) {
+    } else if (doiToSend.match(/^\d+$|^PMC\d+(\.\d+)?$/)) {
       url = '/pmid2bib';
     }
 
@@ -30,7 +35,7 @@ angular.module('Doi2BibApp')
         method: 'GET',
         url: url,
         params: {
-          id: $scope.doi
+          id: doiToSend
         }
       }).
       success(function(data) {
