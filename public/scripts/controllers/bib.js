@@ -17,6 +17,8 @@ angular.module('Doi2BibApp')
     var url;
     var doiToSend = $scope.doi;
 
+    doiToSend = doiToSend.replace(/ /g, '');
+
     if (doiToSend.match(/^doi:/)) {
       doiToSend = doiToSend.substring(4);
     }
