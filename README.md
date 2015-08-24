@@ -12,13 +12,13 @@ doi2bib
 
 ### Create Distribution
     gulp dist
-    
+
 ### Run Distribution
     node app/server.js
 
 ### Testing
     gulp test
-    
+
 
 ### Authors
 
@@ -28,4 +28,4 @@ doi2bib
 
 ### License
 
-Copyright (c) doi2bib, 2014.
+Copyright (c) doi2bib, 2015.
