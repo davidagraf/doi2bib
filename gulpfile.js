@@ -38,7 +38,6 @@ gulp.task('distpublic', ['jshint', 'jison'], function () {
         .pipe(cssFilter)
         .pipe($.csso())
         .pipe(cssFilter.restore)
-        //.pipe($.useref.restore)
         .pipe($.useref())
         .pipe(gulp.dest('dist/public'))
         .pipe($.size());
