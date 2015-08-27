@@ -27,18 +27,17 @@ gulp.task('distapp', function() {
 });
 
 gulp.task('distpublic', ['jshint', 'jison'], function () {
-    var jsFilter = $.filter('**/*.js');
-    var cssFilter = $.filter('**/*.css');
+    var jsFilter = $.filter('**/*.js', {restore: true});
+    var cssFilter = $.filter('**/*.css', {restore: true});
 
     return gulp.src('public/**/*.html')
         .pipe($.useref.assets({searchPath: ['public', '.tmp/public']}))
         .pipe(jsFilter)
         .pipe($.uglify())
-        .pipe(jsFilter.restore())
+        .pipe(jsFilter.restore)
         .pipe(cssFilter)
         .pipe($.csso())
-        .pipe(cssFilter.restore())
-        .pipe($.useref.restore())
+        .pipe(cssFilter.restore)
         .pipe($.useref())
         .pipe(gulp.dest('dist/public'))
         .pipe($.size());

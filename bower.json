@@ -1,10 +1,10 @@
 {
-  "name": "burgerculture",
+  "name": "doi2bib",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "~1.2.16",
-    "angular-route": "~1.2.16",
-    "bootstrap": "~3.1.1",
-    "fontawesome": "~4.1.0"
+    "angular": "~1.4.5",
+    "angular-route": "~1.4.5",
+    "bootstrap": "~3.3.5",
+    "fontawesome": "~4.4.0"
   }
 }
