@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "gulp": "3.9.0",
-    "gulp-bower-files": "0.2.7",
     "gulp-cache": "0.2.10",
     "gulp-clean": "0.3.1",
     "gulp-csso": "1.0.0",

@@ -1,10 +1,11 @@
 'use strict';
 
-var gulp = require('gulp'),
-    fs = require('fs'),
-    protractor = require('gulp-protractor').protractor,
+var gulp = require('gulp');
+var debug = require('gulp-debug');
+var fs = require('fs');
+var protractor = require('gulp-protractor').protractor;
 /*jshint camelcase: false */
-    webdriverUpdate = require('gulp-protractor').webdriver_update;
+var webdriverUpdate = require('gulp-protractor').webdriver_update;
 /*jshint camelcase: true */
 
 // load plugins
@@ -27,17 +28,19 @@ gulp.task('distapp', function() {
 });
 
 gulp.task('distpublic', ['jshint', 'jison'], function () {
+    var assets = $.useref.assets({searchPath: ['public', '.tmp/public']});
     var jsFilter = $.filter('**/*.js', {restore: true});
     var cssFilter = $.filter('**/*.css', {restore: true});
 
     return gulp.src('public/**/*.html')
-        .pipe($.useref.assets({searchPath: ['public', '.tmp/public']}))
+        .pipe(assets)
         .pipe(jsFilter)
         .pipe($.uglify())
         .pipe(jsFilter.restore)
         .pipe(cssFilter)
         .pipe($.csso())
         .pipe(cssFilter.restore)
+        .pipe(assets.restore())
         .pipe($.useref())
         .pipe(gulp.dest('dist/public'))
         .pipe($.size());
@@ -77,8 +80,7 @@ gulp.task('distimages', function () {
 });
 
 gulp.task('distfonts', function () {
-    return $.bowerFiles()
-        .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+    return gulp.src('public/bower_components/**/*.{eot,svg,ttf,woff,woff2}')
         .pipe($.flatten())
         .pipe(gulp.dest('dist/public/fonts'))
         .pipe($.size());
