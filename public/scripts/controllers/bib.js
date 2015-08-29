@@ -19,11 +19,11 @@ angular.module('Doi2BibApp')
 
     doiToSend = doiToSend.replace(/ /g, '');
 
-    if (doiToSend.match(/^doi:/)) {
-      doiToSend = doiToSend.substring(4);
-    }
-
-    if (doiToSend.match(/^10\..+\/.+$/)) {
+    if (doiToSend.match(/^(doi:)?10\..+\/.+$/i)) {
+      // remove optional doi: prefix
+      if (doiToSend.match(/^doi:/i)) {
+        doiToSend = doiToSend.substring(4);
+      }
       url = '/doi2bib';
     } else if (doiToSend.match(/^\d+$|^PMC\d+(\.\d+)?$/)) {
       url = '/pmid2bib';
