@@ -1,6 +1,6 @@
 'use strict';
 
-var 
+var
 request = require('request'),
 Q = require('q'),
 
@@ -42,9 +42,30 @@ pmid2doi = function(pmid) {
     }
   });
   return deferred.promise;
+},
+arxivid2doiOptions = function(arxivid) {
+  var options = {
+    url: 'http://export.arxiv.org/api/query?id_list=?' + arxivid, //arXiv:0901.0203
+  };
+  return options;
+},
+arxivid2doi = function(arxivid) {
+  var deferred = Q.defer();
+  request(arxivid2doiOptions(arxivid), function(error, response, body) {
+    if (response.statusCode !== 200) {
+      deferred.reject(response.statusCode);
+    } else if (!body.getElementsByTagName("arxiv:doi")) {
+      deferred.reject(204);
+    } else {
+      deferred.resolve(body.getElementsByTagName("arxiv:doi")[0]);
+    }
+  });
+  return deferred.promise;
 };
+
 
 module.exports = {
   doi2bib: doi2bib,
-  pmid2doi: pmid2doi
+  pmid2doi: pmid2doi,
+  arxivid2doi: arxivid2doi
 };

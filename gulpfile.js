@@ -59,7 +59,7 @@ gulp.task('distpackage', function() {
         console.log('Error: ' + err);
         return;
     }
-             
+
     data = JSON.parse(data);
     data.devDependencies = [];
 
@@ -70,7 +70,7 @@ gulp.task('distpackage', function() {
       if (err) {
         console.log(err);
       }
-    }); 
+    });
   });
 });
 

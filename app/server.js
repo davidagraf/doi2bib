@@ -57,6 +57,21 @@ app.get('/pmid2bib', function(req, res) {
   }
 });
 
+app.get('/arxivid2bib', function(req, res) {
+  res.set('Content-Type', 'application/x-bibtex');
+
+  if (!/^\d+\.\d+(v(\d+))?$/.test(req.query.id)) {
+    res.writeHead(400);
+    res.end('Invalid arXiv ID');
+  } else {
+    doi2bib.arxivid2doi(req.query.id).
+      then(function(doi) {
+        return doi2bib.doi2bib(doi);
+      }).
+      then(genSuccessHandler(res)).fail(genErrorHandler(res));
+  }
+});
+
 app.listen(
   process.env.OPENSHIFT_NODEJS_PORT || 3000,
   process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
