@@ -45,7 +45,7 @@ pmid2doi = function(pmid) {
 },
 arxivid2doiOptions = function(arxivid) {
   var options = {
-    url: 'http://export.arxiv.org/api/query?id_list=?' + arxivid, //arXiv:0901.0203
+    url: 'http://export.arxiv.org/api/query?id_list=' + arxivid
   };
   return options;
 },
@@ -54,10 +54,10 @@ arxivid2doi = function(arxivid) {
   request(arxivid2doiOptions(arxivid), function(error, response, body) {
     if (response.statusCode !== 200) {
       deferred.reject(response.statusCode);
-    } else if (!body.getElementsByTagName("arxiv:doi")) {
+    } else if (!body.getElementByTagName("arxiv:doi")) {
       deferred.reject(204);
     } else {
-      deferred.resolve(body.getElementsByTagName("arxiv:doi")[0]);
+      deferred.resolve(body.getElementByTagName("arxiv:doi")[0]);
     }
   });
   return deferred.promise;

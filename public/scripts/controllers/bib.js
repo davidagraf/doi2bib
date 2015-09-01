@@ -24,7 +24,7 @@ angular.module('Doi2BibApp')
         idToSend = idToSend.substring(4);
       }
     }
-    if (idToSend.match(/^arxiv:/)) {
+    if (idToSend.match(/^arXiv:/)) {
       idToSend = idToSend.substring(6);
     }
 
