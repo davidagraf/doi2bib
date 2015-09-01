@@ -19,6 +19,10 @@ doi2bib
 ### Testing
     gulp test
 
+### Debugging
+    npm install -g iron-node
+    gulp debug
+
 
 ### Authors
 
