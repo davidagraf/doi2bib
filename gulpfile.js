@@ -23,6 +23,12 @@ gulp.task('serve', ['jison'], function () {
   gulp.watch('./utils/*.jison', ['jison']);
 });
 
+gulp.task('debug', ['jison'], function () {
+  $.run('iron-node app/server.js').exec();
+
+  gulp.watch('./utils/*.jison', ['jison']);
+});
+
 gulp.task('distapp', function() {
   return gulp.src('app/**/*.js').pipe(gulp.dest('dist/app')).pipe($.size());
 });
