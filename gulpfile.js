@@ -7,9 +7,23 @@ var protractor = require('gulp-protractor').protractor;
 /*jshint camelcase: false */
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 /*jshint camelcase: true */
+var check = require('check-dependencies');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
+
+// check if dependencies are ok
+check({
+  checkGitUrls: true
+}, function(result) {
+  // Print the logged errors if dependencies are not ok
+  if (!result.depsWereOk && result.error) {
+    result.error.forEach(function(message) {
+      console.error(message);
+    });
+    process.exit(result.status);
+  }
+});
 
 gulp.task('jshint', function () {
     return gulp.src(['*.js', 'app/**/*.js', 'public/scripts/**/*.js', 'test/**/*.js'])
