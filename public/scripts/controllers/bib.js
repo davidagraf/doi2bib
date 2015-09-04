@@ -35,7 +35,7 @@ angular.module('Doi2BibApp')
     }
 
     if(!url) {
-      $scope.error = 'Invalid ID. Must be DOI, PMID, or arXiv ID.';
+      $scope.error = 'Invalid ID. Must be DOI, PMID, or arXiv ID (after 2007).';
     } else {
       $scope.workinprogress = true;
       $http({
