@@ -3,6 +3,7 @@
 var
 request = require('request'),
 Q = require('q'),
+parseString = require('xml2js').parseString,
 
 doi2bibOptions = function(doi) {
   return {
@@ -54,12 +55,17 @@ arxivid2doi = function(arxivid) {
   request(arxivid2doiOptions(arxivid), function(error, response, body) {
     if (response.statusCode !== 200) {
       deferred.reject(response.statusCode);
-    } else if (!body.getElementByTagName("arxiv:doi")) {
+    } else if (!body) {
       deferred.reject(204);
     } else {
-      deferred.resolve(body.getElementByTagName("arxiv:doi")[0]);
-    }
-  });
+      parseString(body, function(err, result) {
+        if (err || !result.feed.entry[0]["arxiv:doi"]) {
+          deferred.reject(404);
+        } else {
+          var doi = result.feed.entry[0]["arxiv:doi"][0]["_"];
+          deferred.resolve(doi);
+        }});
+      }});
   return deferred.promise;
 };
 

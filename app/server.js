@@ -59,7 +59,6 @@ app.get('/pmid2bib', function(req, res) {
 
 app.get('/arxivid2bib', function(req, res) {
   res.set('Content-Type', 'application/x-bibtex');
-
   if (!/^\d+\.\d+(v(\d+))?$/.test(req.query.id)) {
     res.writeHead(400);
     res.end('Invalid arXiv ID');
