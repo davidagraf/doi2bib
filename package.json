@@ -23,7 +23,8 @@
   "dependencies": {
     "express": "4.13.3",
     "q": "1.4.1",
-    "request": "2.61.0"
+    "request": "2.61.0",
+    "xml2js": "^0.4.11"
   },
   "devDependencies": {
     "gulp": "3.9.0",
