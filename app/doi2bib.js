@@ -59,10 +59,10 @@ arxivid2doi = function(arxivid) {
       deferred.reject(204);
     } else {
       parseString(body, function(err, result) {
-        if (err || !result.feed.entry[0]["arxiv:doi"]) {
+        if (err || !result.feed.entry[0]['arxiv:doi']) {
           deferred.reject(404);
         } else {
-          var doi = result.feed.entry[0]["arxiv:doi"][0]["_"];
+          var doi = result.feed.entry[0]['arxiv:doi'][0]._;
           deferred.resolve(doi);
         }});
       }});
