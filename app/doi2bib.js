@@ -1,8 +1,9 @@
 'use strict';
 
-var 
+var
 request = require('request'),
 Q = require('q'),
+parseString = require('xml2js').parseString,
 
 doi2bibOptions = function(doi) {
   return {
@@ -42,9 +43,35 @@ pmid2doi = function(pmid) {
     }
   });
   return deferred.promise;
+},
+arxivid2doiOptions = function(arxivid) {
+  var options = {
+    url: 'http://export.arxiv.org/api/query?id_list=' + arxivid
+  };
+  return options;
+},
+arxivid2doi = function(arxivid) {
+  var deferred = Q.defer();
+  request(arxivid2doiOptions(arxivid), function(error, response, body) {
+    if (response.statusCode !== 200) {
+      deferred.reject(response.statusCode);
+    } else if (!body) {
+      deferred.reject(204);
+    } else {
+      parseString(body, function(err, result) {
+        if (err || !result.feed.entry[0]['arxiv:doi']) {
+          deferred.reject(404);
+        } else {
+          var doi = result.feed.entry[0]['arxiv:doi'][0]._;
+          deferred.resolve(doi);
+        }});
+      }});
+  return deferred.promise;
 };
+
 
 module.exports = {
   doi2bib: doi2bib,
-  pmid2doi: pmid2doi
+  pmid2doi: pmid2doi,
+  arxivid2doi: arxivid2doi
 };

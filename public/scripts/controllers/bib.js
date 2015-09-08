@@ -15,29 +15,34 @@ angular.module('Doi2BibApp')
   $scope.toBib = function() {
     $scope.error = $scope.bib = $scope.url = undefined;
     var url;
-    var doiToSend = $scope.doi;
+    var idToSend = $scope.doi;
 
-    doiToSend = doiToSend.replace(/ /g, '');
+    idToSend = idToSend.replace(/ /g, '');
 
-    if (doiToSend.match(/^(doi:)?10\..+\/.+$/i)) {
-      // remove optional doi: prefix
-      if (doiToSend.match(/^doi:/i)) {
-        doiToSend = doiToSend.substring(4);
+    if (idToSend.match(/^(doi:)?10\..+\/.+$/i)) {
+      if (idToSend.match(/^doi:/i)) {
+        idToSend = idToSend.substring(4);
       }
       url = '/doi2bib';
-    } else if (doiToSend.match(/^\d+$|^PMC\d+(\.\d+)?$/)) {
+    } else if (idToSend.match(/^\d+$|^PMC\d+(\.\d+)?$/)) {
       url = '/pmid2bib';
+    }
+    else if (idToSend.match(/^(arxiv:)?\d+\.\d+(v(\d+))?/i)) {
+      if (idToSend.match(/^arxiv:/i)) {
+        idToSend = idToSend.substring(6);
+      }
+      url = '/arxivid2bib';
     }
 
     if(!url) {
-      $scope.error = 'Invalid ID. Must be DOI or PMID.';
+      $scope.error = 'Invalid ID. Must be DOI, PMID, or arXiv ID (after 2007).';
     } else {
       $scope.workinprogress = true;
       $http({
         method: 'GET',
         url: url,
         params: {
-          id: doiToSend
+          id: idToSend
         }
       }).
       success(function(data) {
@@ -60,5 +65,4 @@ angular.module('Doi2BibApp')
       });
     }
   };
-
 }]);
