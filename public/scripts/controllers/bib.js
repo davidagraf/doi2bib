@@ -18,6 +18,7 @@ angular.module('Doi2BibApp')
     var idToSend = $scope.doi;
 
     idToSend = idToSend.replace(/ /g, '');
+    idToSend = idToSend.replace(/^https?:\/\/dx\.doi\.org\//i, '');
 
     if (idToSend.match(/^(doi:)?10\..+\/.+$/i)) {
       if (idToSend.match(/^doi:/i)) {
