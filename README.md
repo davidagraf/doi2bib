@@ -32,4 +32,4 @@ doi2bib
 
 ### License
 
-Copyright (c) doi2bib, 2015.
+Copyright (c) doi2bib, 2017.
