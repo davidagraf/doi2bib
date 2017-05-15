@@ -7,7 +7,7 @@ parseString = require('xml2js').parseString,
 
 doi2bibOptions = function(doi) {
   return {
-    url: 'http://dx.doi.org/' + doi,
+    url: 'https://doi.org/' + doi,
     headers: {
       'Accept': 'application/x-bibtex; charset=utf-8'
     }
