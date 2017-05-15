@@ -24,14 +24,27 @@ angular.module('Doi2BibApp')
     }
 
     // bib url contains url encoding -> we decode those characters here
-    bib.tags.url = decodeURIComponent(bib.tags.url);
+		if (bib.tags.url) {
+    	bib.tags.url = decodeURIComponent(bib.tags.url);
+		}
 
 	  /**
 		 * Sometimes, the greek chars aren't properlty formatted in the received bib.
 		 * e.g. the bib for 10.1002/cncr.29046 contains {\varEpsilon} instead of {$\varEpsilon$}.
      * There, we inject the missing $ chars into the title string.
 	   */
-		bib.tags.title = bib.tags.title.replace(/(\{)(\\var[A-Z]?[a-z]*)(\})/, '$1$$$2$$$3');
+		function insertDollars(str) {
+			return str.replace(/(\{)(\\var[A-Z]?[a-z]*)(\})/, '$1$$$2$$$3');
+		}
+		if (bib.tags.title) {
+			if (Array.isArray(bib.tags.title)) {
+				bib.tags.title = bib.tags.title.map(function(t) {
+					return insertDollars(t);
+				})
+			} else {
+				bib.tags.title = insertDollars(bib.tags.title);
+			}
+		}
 
     encodeSpecialChars = function(str) {
       return str.replace(
